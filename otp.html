@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="reg.css">
+
+    <script src="jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#regForm").submit(function(e){
+                e.preventDefault();
+
+                var isvalid=true;
+                var otp=$("#otp").val().trim();
+
+                if(otp=="" || otp.length!=4)
+                {
+                    $("#otperr").show();
+                    isvalid=false
+                }
+                else
+                {
+                    $("#otperr").hide();
+                }
+
+                if(isvalid)
+                {
+                        $("#msg").html('<span class="text-success">Successful !</span>');
+                        setTimeout(function(){
+                            window.location.href="setnewpassword.html";
+                        },1000)
+                }
+                else
+                {
+                    $("#msg").html('<span class="text-danger">Invalid OTP !</span>');
+                }
+                
+            })
+        })
+    </script>
+</head>
+<body class="bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="head">
+                <h3 class="text-center">OTP</h3>
+            </div>
+            <form action="" class="p-3" id="regForm">
+                
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="otp" maxlength="4" placeholder="otp">
+                    <label for="">Enter OTP</label>
+                    <div class="error" id="otperr">OTP must be only 4 Digits...</div>
+                </div>
+                <button type="submit" class="btn btn-primary form-control mt-3">Submit</button>
+                <div class="text-center" id="msg"></div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

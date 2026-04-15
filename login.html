@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="reg.css">
+
+    <script src="jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#regForm").submit(function(e){
+                e.preventDefault();
+
+                var isvalid=true;
+                var MoNo=$("#MoNo").val().trim();
+                var pass=$("#pass").val();
+
+                if(!/^\d{10}$/.test(MoNo))
+                {
+                    $("#MoNoerr").show();
+                    isvalid=false
+                }
+                else
+                {
+                    $("#MoNoerr").hide();
+                }
+
+                if(pass=="")
+                {
+                    $("#passerr").show();
+                    isvalid=false
+                }
+                else
+                {
+                    $("#passerr").hide();
+                }
+
+                var savedMoNo=localStorage.getItem("MoNo")
+                var savedpass=localStorage.getItem("pass")
+
+                if(isvalid)
+                {
+                    if(MoNo===savedMoNo && pass===savedpass)
+                    {
+                        $("#msg").html('<span class="text-success">Successful Login !</span>');
+                        setTimeout(function(){
+                            window.location.href="home.html";
+                        },1000)
+                    }
+                    else
+                    {
+                        $("#msg").html('<span class="text-danger">Invalid Mobile Number or Password !</span>');
+                    }
+                }
+                else
+                {
+                    $("#msg").html('<span class="text-danger">Invalid Mobile Number or Password !</span>');
+                }
+                
+            })
+        })
+    </script>
+</head>
+<body class="bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="head">
+                <h3 class="text-center">Employee Login</h3>
+            </div>
+            <form action="" class="p-3" id="regForm">
+                
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="MoNo" maxlength="10" placeholder="Mobile Number">
+                    <label for="">Mobile Number</label>
+                    <div class="error" id="MoNoerr">Mobile Number must be 10 Digits...</div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="pass" placeholder="password">
+                    <label for="">Password</label>
+                    <div class="error" id="passerr">Password is Requried...</div>
+                </div>
+                <button type="submit" class="btn btn-primary form-control mt-3">Login</button>
+                <p class="text-center">
+                    <a href="Forget_password.html">Forget Password !</a>
+                </p>
+                <div class="text-center" id="msg"></div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

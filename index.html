@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="reg.css">
+
+    <script src="jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#regForm").submit(function(e){
+                e.preventDefault();
+
+                var isvalid=true;
+                var fname=$("#fname").val().trim();
+                var lname=$("#lname").val().trim();
+                var email=$("#email").val().trim();
+                var MoNo=$("#MoNo").val().trim();
+                var pass=$("#pass").val();
+                var cpass=$("#cpass").val();
+
+                if(fname=="")
+                {
+                    $("#fnameerr").show();
+                    isvalid=false
+                }
+                else
+                {
+                    $("#fnameerr").hide();
+                }
+
+                if(lname=="")
+                {
+                    $("#lnameerr").show();
+                    isvalid=false
+                }
+                else
+                {
+                    $("#lnameerr").hide();
+                }
+
+                if(email=="")
+                {
+                    $("#emailerr").show();
+                    isvalid=false
+                }
+                else
+                {
+                    $("#emailerr").hide();
+                }
+
+                if(!/^\d{10}$/.test(MoNo))
+                {
+                    $("#MoNoerr").show();
+                    isvalid=false
+                }
+                else
+                {
+                    $("#MoNoerr").hide();
+                }
+
+                if(pass=="")
+                {
+                    $("#passerr").show();
+                    isvalid=false
+                }
+                else
+                {
+                    $("#passerr").hide();
+                }
+
+                if(cpass!==pass)
+                {
+                    $("#cpasserr").show();
+                    isvalid=false
+                }
+                else
+                {
+                    $("#cpasserr").hide();
+                }
+
+                if(isvalid)
+                {
+                    localStorage.setItem("fname",fname);
+                    localStorage.setItem("lname",lname);
+                    localStorage.setItem("email",email);
+                    localStorage.setItem("MoNo",MoNo);
+                    localStorage.setItem("pass",pass);
+
+                    $("#msg").html('<span class="text-success">Successful !</span>');
+                    setTimeout(function(){
+                        window.location.href="login.html";
+                    },1000)
+                }
+                else
+                {
+                    $("#msg").html('<span class="text-danger">fail !</span>');
+                }
+            })
+        })
+    </script>
+</head>
+<body class="bg">
+    
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="head">
+                <h3 class="text-center p-1">Registartion Form</h3>
+            </div>
+            <form action="" class="p-3" id="regForm">  
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="fname" placeholder="First Name">
+                    <label for="">First Name</label>
+                    <div class="error" id="fnameerr">First Name is Requried...</div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="lname" placeholder="Last Name">
+                    <label for="">Last Name</label>
+                    <div class="error" id="lnameerr">Last Name is Requried...</div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control mt-3" id="email" placeholder="Email">
+                    <label for="">Email</label>
+                    <div class="error" id="emailerr">Email is Requried...</div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control mt-3" id="MoNo" maxlength="10" placeholder="Mobile Number">
+                    <label for="">Mobile Number</label>
+                    <div class="error" id="MoNoerr">Mobile Number must be 10 Digits...</div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control mt-3" id="pass" placeholder="Password">
+                    <label for="">Password</label>
+                    <div class="error" id="passerr">Password is Requried...</div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control mt-3" id="cpass" placeholder="Conifirm Password">
+                    <label for="">Conifirm Password</label>
+                    <div class="error" id="cpasserr">Conifirm Password Doesn't Match...</div>
+                </div>
+                <button type="submit" class="btn btn-primary form-control mt-3">Registartion</button>
+                <p class="text-center">
+                    <a href="login.html">Already Login</a>
+                </p>
+                <div class="text-center" id="msg"></div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
