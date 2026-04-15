@@ -50,3 +50,6 @@ body {
             color: #2c3e50;
             font-weight: bold;
         }
+.navbar-toggler-icon {
+    filter: invert(1) !important;
+}
